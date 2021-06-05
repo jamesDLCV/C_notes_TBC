@@ -17,9 +17,9 @@ int main() {
 	
 	float my_arr[n];	// Note: cannot change length after declaration
 	
-	// 배열을 선언할때는 symbolic constant나 literal을넣어줘야 하지만
-	// 한다. compile time에  알  수 있는 값만  넣어줘야 한다 
-	// VALs에서는 된다 .
+	// 배열을 선언할때는 symbolic constant나 literal을 넣어줘야 했다.
+	// compile time에 알 수 있는 값만 넣어 줘야 했다.  
+	// 하지만 VALs에서는 된다.
 	// 이거보다는 동적할당을 더 많이 사용한다 
 	  
 	
