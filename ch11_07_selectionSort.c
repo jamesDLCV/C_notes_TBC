@@ -3,49 +3,76 @@
 // 선택 정렬 Selection Sort
 // 오름차순, 내림차순으로 정렬하는 것이다. 
 
+void swap(int* xp, int* yp);
+void printArray(int arr[], int size);
+void selectionSort(int arr[], int n);
+
 int main() {
     /*
-        Selection Sort Algorithm
-
-        Youtube search "Selection Sort", "CS50"
-
-        64 25 12 22 11 (min_idx = 0)
-           64          (min_idx = 0)
-           25          (min_idx = 1)
-              25       (min_idx = 1)
-              12       (min_idx = 2)
-                 12    (min_idx = 2)
-                    12 (min_idx = 2)
-                    11 (min_idx = 4)
-        11 25 12 22 64 (swap arr[0] and arr[4])    
-
-        11 25 12 22 64 (min_idx = 1)
-              25       (min_idx = 1)
-              12       (min_idx = 2)
-                 12    (min_idx = 2)
-                    12 (min_idx = 2)
-        11 12 25 22 64 (swap arr[1] and arr[2])    
-        ...
+        Selection Sort Algorithm 
+        https://www.geeksforgeeks.org/selection-sort/
     */
 
-    // 이렇게 작동이 되는구나 하는 것은 어떤 자료를 보고 해도 되지만, 
-    // 코드는 직접 구현해 보기를 바란다. 
+    int arr[] = { 64, 25, 12, 22, 11 };
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    char ch[5] = { 64, 25, 12, 22, 11 };
-    int i, j, tmp;
-
-    for (i = 0; i < (sizeof(ch) - 1); ++i) {
-        for (j = i + 1; j < sizeof(ch); ++j) {
-            if (ch[i] > ch[j]) {
-                tmp = ch[i];
-                ch[i] = ch[j];
-                ch[j] = tmp;
-            }
-        }            
-    }
-
-    for (i = 0; i < 5; ++i)
-        printf("%d ", ch[i]);
+    selectionSort(arr, n);      // ascending order
+    printArray(arr, n);
 
     return 0;
 }
+
+void swap(int* xp, int* yp) {
+    int tmp;
+    tmp = *xp;
+    *xp = *yp;
+    *yp = tmp;
+}
+
+void printArray(int arr[], int size) {
+    int i;
+    for (i = 0; i < size; ++i)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+void selectionSort(int arr[], int n) {
+    int i, j, min_idx;
+    for (i = 0; i < n - 1; ++i) {
+        min_idx = i;
+        for (j = i  + 1; j < n; ++j) {
+            if (arr[min_idx] > arr[j])
+                min_idx = j;
+        }
+        swap(&arr[min_idx], &arr[i]);
+    }
+}
+
+//// 이렇게 하면 swap() 함수는 필요없다. 
+//void selectionSort(int arr[], int n) {
+//    int i, j, min_idx;
+//    for (i = 0; i < n - 1; ++i) {
+//        min_idx = i;
+//        for (j = i + 1; j < n; ++j) {
+//            if (arr[min_idx] > arr[j])
+//                min_idx = j;
+//        }
+//        int tmp = arr[i];
+//        arr[i] = arr[min_idx];
+//        arr[min_idx] = tmp;
+//    }
+//}
+
+////이렇게 하면 비교를 하면서 계속 복사를 해야 하므로, 느리다.
+//void selectionSort(int arr[], int n) {
+//    int i, j, min_idx;
+//    for (i = 0; i < n - 1; ++i) {    
+//        for (j = i + 1; j < n; ++j) {
+//            if (arr[i] > arr[j]) {
+//                swap(&arr[j], &arr[i]);
+//            }
+//        }        
+//    }
+//}
+
+
